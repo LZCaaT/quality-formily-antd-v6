@@ -4,7 +4,7 @@ import {
   FormItem,
   FormButtonGroup,
   Submit,
-} from '@quality-formily/antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm, onFieldReact, FormPathPattern, Field } from '@formily/core'
 import { FormProvider, createSchemaField } from '@formily/react'
 import { action } from '@formily/reactive'

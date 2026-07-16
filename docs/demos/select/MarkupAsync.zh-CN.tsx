@@ -3,7 +3,7 @@ import {
   FormItem,
   Select,
   Submit,
-} from '@quality-formily/antd-v6'
+} from '@designable-next/formily-antd-v6'
 import {
   createForm,
   Field,

@@ -5,7 +5,7 @@ import {
   Input,
   Space,
   Submit,
-} from '@quality-formily/antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm } from '@formily/core'
 import { createSchemaField, FormProvider } from '@formily/react'
 import React from 'react'

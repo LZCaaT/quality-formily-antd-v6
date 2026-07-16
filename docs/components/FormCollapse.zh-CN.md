@@ -15,7 +15,7 @@ import {
   Input,
   FormButtonGroup,
   Submit,
-} from '@quality-formily/antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm } from '@formily/core'
 import { FormProvider, createSchemaField } from '@formily/react'
 import { Button } from 'antd'
@@ -120,7 +120,7 @@ import {
   Input,
   FormButtonGroup,
   Submit,
-} from '@quality-formily/antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm } from '@formily/core'
 import { FormProvider, createSchemaField } from '@formily/react'
 import { Button } from 'antd'

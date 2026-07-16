@@ -1,9 +1,9 @@
-# @quality-formily/antd-v6-settings-form
+# @designable-next/formily-antd-v6-settings-form
 
 > Formily Designable Settings Form
 
 ## Install
 
 ```bash
-npm install @quality-formily/antd-v6-settings-form --save
+npm install @designable-next/formily-antd-v6-settings-form --save
 ```

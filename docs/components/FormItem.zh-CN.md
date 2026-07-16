@@ -12,7 +12,7 @@ import {
   FormItem,
   FormButtonGroup,
   Submit,
-} from '@quality-formily/antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm } from '@formily/core'
 import { FormProvider, createSchemaField } from '@formily/react'
 
@@ -53,7 +53,7 @@ import {
   FormItem,
   FormButtonGroup,
   Submit,
-} from '@quality-formily/antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm } from '@formily/core'
 import { FormProvider, createSchemaField } from '@formily/react'
 
@@ -102,7 +102,7 @@ import {
   FormItem,
   FormButtonGroup,
   Submit,
-} from '@quality-formily/antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm } from '@formily/core'
 import { FormProvider, Field } from '@formily/react'
 
@@ -145,7 +145,7 @@ import {
   FormItem,
   NumberPicker,
   Switch,
-} from '@quality-formily/antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm } from '@formily/core'
 import { FormProvider, createSchemaField } from '@formily/react'
 
@@ -406,7 +406,7 @@ import {
   FormItem,
   NumberPicker,
   Switch,
-} from '@quality-formily/antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm } from '@formily/core'
 import { FormProvider, createSchemaField } from '@formily/react'
 
@@ -535,7 +535,7 @@ import {
   FormItem,
   NumberPicker,
   Switch,
-} from '@quality-formily/antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm } from '@formily/core'
 import { FormProvider, createSchemaField } from '@formily/react'
 
@@ -666,7 +666,7 @@ import {
   FormLayout,
   NumberPicker,
   Switch,
-} from '@quality-formily/antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm } from '@formily/core'
 import { FormProvider, createSchemaField } from '@formily/react'
 import { CheckCircleFilled, LoadingOutlined } from '@ant-design/icons'
@@ -928,7 +928,7 @@ import {
   FormItem,
   NumberPicker,
   Switch,
-} from '@quality-formily/antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm, onFieldChange } from '@formily/core'
 import { FormProvider, createSchemaField } from '@formily/react'
 

@@ -44,8 +44,11 @@
     }
   },
   "resolutions": {
-    "rollup-plugin-typescript2": "^0.34.1",
+    "rollup-plugin-typescript2": "0.34.1",
     "typescript": "^5.2.0"
+  },
+  "overrides": {
+    "rollup-plugin-typescript2": "0.34.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",

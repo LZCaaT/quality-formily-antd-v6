@@ -244,7 +244,7 @@
 
 ### :tada: Enhancements
 
-1. [feat: chnage to @quality-formily/antd-v6](https://github.com/formilyjs/antd/commit/8e69136) :point_right: ( [yiyunwan](https://github.com/yiyunwan) )
+1. [feat: chnage to @designable-next/formily-antd-v6](https://github.com/formilyjs/antd/commit/8e69136) :point_right: ( [yiyunwan](https://github.com/yiyunwan) )
 
 1. [feat: antd v5 (#2)](https://github.com/formilyjs/antd/commit/a3d382f) :point_right: ( [yiyunwan](https://github.com/yiyunwan) )
 

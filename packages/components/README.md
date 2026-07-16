@@ -1,9 +1,9 @@
-# @quality-formily/antd-v6
+# @designable-next/formily-antd-v6
 
 > Formily Component Adaptor
 
 ## Install
 
 ```bash
-npm install @quality-formily/antd-v6 --save
+npm install @designable-next/formily-antd-v6 --save
 ```
