@@ -1,9 +1,9 @@
-# @potop/formily-antd-v6-settings-form
+# @quality-formily/antd-v6-settings-form
 
 > Formily Designable Settings Form
 
 ## 安装
 
 ```bash
-npm install @potop/formily-antd-v6-settings-form --save
+npm install @quality-formily/antd-v6-settings-form --save
 ```

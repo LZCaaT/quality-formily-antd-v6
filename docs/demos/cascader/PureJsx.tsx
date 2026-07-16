@@ -4,7 +4,7 @@ import {
   FormItem,
   FormButtonGroup,
   Submit,
-} from '@potop/formily-antd-v6'
+} from '@quality-formily/antd-v6'
 import {
   createForm,
   onFieldReact,

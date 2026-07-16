@@ -1,6 +1,7 @@
 {
-  "name": "@potop/formily-antd-v6-setters",
-  "version": "2.0.2",
+  "name": "@quality-formily/antd-v6-setters",
+  "version": "0.1.0-alpha.0",
+  "private": true,
   "license": "MIT",
   "main": "lib",
   "types": "lib/index.d.ts",
@@ -26,19 +27,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/potop/formily-antd-v6.git"
+    "url": "git+https://github.com/LZCaaT/quality-formily-antd-v6.git"
   },
   "bugs": {
-    "url": "https://github.com/potop/formily-antd-v6/issues"
+    "url": "https://github.com/LZCaaT/quality-formily-antd-v6/issues"
   },
-  "homepage": "https://github.com/potop/formily-antd-v6#readme",
+  "homepage": "https://github.com/LZCaaT/quality-formily-antd-v6#readme",
   "publishConfig": {
     "access": "public"
   },
   "peerDependencies": {
-    "react": ">=18.0.0",
-    "react-dom": ">=18.0.0",
-    "react-is": ">=18.0.0"
-  },
-  "gitHead": "c4f2172045f094220a0a73d4a7c0b9da59ba4748"
+    "react": ">=19.0.0 <20.0.0",
+    "react-dom": ">=19.0.0 <20.0.0",
+    "react-is": ">=19.0.0 <20.0.0"
+  }
 }

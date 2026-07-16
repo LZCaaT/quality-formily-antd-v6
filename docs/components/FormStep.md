@@ -13,7 +13,7 @@ import {
   FormItem,
   Input,
   FormButtonGroup,
-} from '@potop/formily-antd-v6'
+} from '@quality-formily/antd-v6'
 import { createForm } from '@formily/core'
 import { FormProvider, FormConsumer, createSchemaField } from '@formily/react'
 import { Button } from 'antd'
@@ -117,7 +117,7 @@ import {
   FormItem,
   Input,
   FormButtonGroup,
-} from '@potop/formily-antd-v6'
+} from '@quality-formily/antd-v6'
 import { createForm } from '@formily/core'
 import { FormProvider, FormConsumer, createSchemaField } from '@formily/react'
 import { Button } from 'antd'
