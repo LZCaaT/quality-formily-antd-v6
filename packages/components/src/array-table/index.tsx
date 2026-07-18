@@ -366,7 +366,7 @@ const WrapperComp = (props: React.HTMLAttributes<HTMLTableSectionElement>) => {
       start={startIndex}
       list={dataSource.slice()}
       accessibility={{
-        container: ref.current || undefined,
+        container: typeof document === 'undefined' ? undefined : document.body,
       }}
       onSortStart={(event) => {
         addTdStyles(event.active.id as number)
