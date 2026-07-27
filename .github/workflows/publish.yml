@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -35,10 +37,37 @@ jobs:
         shell: bash
         run: |
           VERSION="$(node -p "require('./lerna.json').version")"
+          PACKAGE_VERSION="$(node -p "require('./packages/components/package.json').version")"
           EXPECTED_TAG="v${VERSION}"
 
           if [[ "${GITHUB_REF_NAME}" != "${EXPECTED_TAG}" ]]; then
             echo "Git tag ${GITHUB_REF_NAME} does not match package version ${VERSION}." >&2
+            exit 1
+          fi
+
+          if [[ "${PACKAGE_VERSION}" != "${VERSION}" ]]; then
+            echo "lerna.json version ${VERSION} does not match package version ${PACKAGE_VERSION}." >&2
+            exit 1
+          fi
+
+          node <<'NODE'
+          const fs = require('node:fs')
+          const path = require('node:path')
+          const expected = require('./lerna.json').version
+          const packageDirectories = fs.readdirSync('./packages')
+
+          for (const directory of packageDirectories) {
+            const packagePath = path.join('./packages', directory, 'package.json')
+            if (!fs.existsSync(packagePath)) continue
+            const pkg = require(packagePath)
+            if (pkg.version !== expected) {
+              throw new Error(`${pkg.name} version ${pkg.version} does not match ${expected}`)
+            }
+          }
+          NODE
+
+          if npm view "@designable-next/formily-antd-v6@${VERSION}" version >/dev/null 2>&1; then
+            echo "@designable-next/formily-antd-v6@${VERSION} already exists on npm." >&2
             exit 1
           fi
 
@@ -55,10 +84,50 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts --legacy-peer-deps
 
+      - name: Run release checks
+        run: |
+          npm test -- --runInBand packages/components/src/__tests__/form-grid.spec.tsx
+          npm run lint
+
       - name: Build package
         run: npm run build --workspace @designable-next/formily-antd-v6
+
+      - name: Verify package contents
+        run: |
+          npm pack --workspace @designable-next/formily-antd-v6 --dry-run --json > "${RUNNER_TEMP}/package.json"
+          node - "${RUNNER_TEMP}/package.json" <<'NODE'
+          const fs = require('node:fs')
+          const pack = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'))[0]
+          const requiredFiles = [
+            'lib/form-grid/index.js',
+            'esm/form-grid/index.js',
+            'lib/index.d.ts',
+          ]
+          const files = new Set(pack.files.map((file) => file.path))
+
+          for (const file of requiredFiles) {
+            if (!files.has(file)) throw new Error(`Release tarball is missing ${file}`)
+          }
+          NODE
 
       - name: Publish package
         env:
           DIST_TAG: ${{ steps.release.outputs.dist_tag }}
         run: npm publish --workspace @designable-next/formily-antd-v6 --tag "${DIST_TAG}" --provenance
+
+      - name: Verify published version
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        shell: bash
+        run: |
+          for attempt in {1..12}; do
+            PUBLISHED_VERSION="$(npm view "@designable-next/formily-antd-v6@${VERSION}" version 2>/dev/null || true)"
+            if [[ "${PUBLISHED_VERSION}" == "${VERSION}" ]]; then
+              echo "Verified @designable-next/formily-antd-v6@${VERSION} on npm."
+              exit 0
+            fi
+            sleep 10
+          done
+
+          echo "Published package was not visible on npm after 120 seconds." >&2
+          exit 1

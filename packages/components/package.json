@@ -8,10 +8,15 @@
     "npm": ">=3.0.0"
   },
   "module": "esm",
-  "umd:main": "dist/formily.antd.umd.production.js",
-  "unpkg": "dist/formily.antd.umd.production.js",
-  "jsdelivr": "dist/formily.antd.umd.production.js",
+  "umd:main": "dist/designable-next.formily-antd-v6.umd.production.js",
+  "unpkg": "dist/designable-next.formily-antd-v6.umd.production.js",
+  "jsdelivr": "dist/designable-next.formily-antd-v6.umd.production.js",
   "jsnext:main": "esm",
+  "files": [
+    "lib",
+    "esm",
+    "dist"
+  ],
   "sideEffects": [
     "dist/*",
     "esm/*.js",
