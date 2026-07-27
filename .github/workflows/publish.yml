@@ -59,7 +59,7 @@ jobs:
           for (const directory of packageDirectories) {
             const packagePath = path.join('./packages', directory, 'package.json')
             if (!fs.existsSync(packagePath)) continue
-            const pkg = require(packagePath)
+            const pkg = require(path.resolve(packagePath))
             if (pkg.version !== expected) {
               throw new Error(`${pkg.name} version ${pkg.version} does not match ${expected}`)
             }
