@@ -4,7 +4,7 @@ import {
   FormItem,
   FormButtonGroup,
   Submit,
-} from '@potop/formily-antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm } from '@formily/core'
 import { FormProvider, Field } from '@formily/react'
 

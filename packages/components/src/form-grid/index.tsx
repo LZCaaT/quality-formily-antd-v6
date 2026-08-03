@@ -2,7 +2,7 @@ import { Grid, IGridOptions } from '@formily/grid'
 import { observer } from '@formily/react'
 import { markRaw } from '@formily/reactive'
 import cls from 'classnames'
-import React, { useContext, useLayoutEffect, useMemo, useRef } from 'react'
+import React, { useCallback, useContext, useMemo } from 'react'
 import { useFormLayout } from '../form-layout'
 import { pickDataProps, usePrefixCls } from '../__builtins__'
 
@@ -46,16 +46,19 @@ const InternalFormGrid = observer(
       () => markRaw(options?.grid ? options.grid : new Grid(options)),
       [Grid.id(options)]
     )
-    const ref = useRef<HTMLDivElement>(null)
     const prefixCls = usePrefixCls('formily-grid', props)
 
     const [wrapSSR, hashId] = useStyle(prefixCls)
     const dataProps = pickDataProps(props)
-    useLayoutEffect(() => {
-      if (ref.current) {
-        return grid.connect(ref.current)
-      }
-    }, [grid])
+    const connect = useCallback(
+      (element: HTMLDivElement | null) => {
+        if (!element) return
+        const dispose = grid.connect(element)
+        element.style.gridTemplateColumns = grid.templateColumns
+        return dispose
+      },
+      [grid]
+    )
     return (
       <FormGridContext.Provider value={grid}>
         {wrapSSR(
@@ -67,7 +70,7 @@ const InternalFormGrid = observer(
               gridTemplateColumns: grid.templateColumns,
               gap: grid.gap,
             }}
-            ref={ref}
+            ref={connect}
           >
             {children}
           </div>
@@ -83,7 +86,14 @@ const InternalFormGrid = observer(
 export const GridColumn: React.FC<React.PropsWithChildren<IGridColumnProps>> =
   observer(({ gridSpan = 1, children, ...props }) => {
     return (
-      <div {...props} style={props.style} data-grid-span={gridSpan}>
+      <div
+        {...props}
+        style={{
+          gridColumn: gridSpan === -1 ? '1 / -1' : `span ${gridSpan} / auto`,
+          ...props.style,
+        }}
+        data-grid-span={gridSpan}
+      >
         {children}
       </div>
     )

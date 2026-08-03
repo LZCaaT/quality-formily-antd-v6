@@ -1,6 +1,6 @@
 {
-  "name": "@potop/formily-antd-v6",
-  "version": "2.0.2",
+  "name": "@designable-next/formily-antd-v6",
+  "version": "0.1.0-beta.0",
   "license": "MIT",
   "main": "lib",
   "types": "lib/index.d.ts",
@@ -8,10 +8,15 @@
     "npm": ">=3.0.0"
   },
   "module": "esm",
-  "umd:main": "dist/formily.antd.umd.production.js",
-  "unpkg": "dist/formily.antd.umd.production.js",
-  "jsdelivr": "dist/formily.antd.umd.production.js",
+  "umd:main": "dist/designable-next.formily-antd-v6.umd.production.js",
+  "unpkg": "dist/designable-next.formily-antd-v6.umd.production.js",
+  "jsdelivr": "dist/designable-next.formily-antd-v6.umd.production.js",
   "jsnext:main": "esm",
+  "files": [
+    "lib",
+    "esm",
+    "dist"
+  ],
   "sideEffects": [
     "dist/*",
     "esm/*.js",
@@ -26,28 +31,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/potop/formily-antd-v6.git"
+    "url": "git+https://github.com/LZCaaT/quality-formily-antd-v6.git"
   },
   "bugs": {
-    "url": "https://github.com/potop/formily-antd-v6/issues"
+    "url": "https://github.com/LZCaaT/quality-formily-antd-v6/issues"
   },
-  "homepage": "https://github.com/potop/formily-antd-v6#readme",
+  "homepage": "https://github.com/LZCaaT/quality-formily-antd-v6#readme",
   "publishConfig": {
     "access": "public"
   },
   "peerDependencies": {
-    "@types/react": ">=18.0.0",
-    "@types/react-dom": ">=18.0.0",
-    "antd": "^6.0.0",
-    "react": ">=18.0.0",
-    "react-dom": ">=18.0.0",
-    "react-is": ">=18.0.0"
-  },
-  "dependencies": {
-    "@ant-design/cssinjs": "^2.1.0",
-    "@ant-design/icons": "^6.1.0",
-    "@dnd-kit/core": "^6.0.0",
-    "@dnd-kit/sortable": "^7.0.0",
     "@formily/core": "^2.3.7",
     "@formily/grid": "^2.3.7",
     "@formily/json-schema": "^2.3.7",
@@ -55,8 +48,28 @@
     "@formily/reactive": "^2.3.7",
     "@formily/reactive-react": "^2.3.7",
     "@formily/shared": "^2.3.7",
+    "@types/react": ">=19.0.0 <20.0.0",
+    "@types/react-dom": ">=19.0.0 <20.0.0",
+    "antd": "^6.0.0",
+    "react": ">=19.0.0 <20.0.0",
+    "react-dom": ">=19.0.0 <20.0.0",
+    "react-is": ">=19.0.0 <20.0.0"
+  },
+  "dependencies": {
+    "@ant-design/cssinjs": "^2.1.0",
+    "@ant-design/icons": "^6.1.0",
+    "@dnd-kit/core": "^6.0.0",
+    "@dnd-kit/sortable": "^7.0.0",
     "classnames": "^2.2.6",
     "react-sticky-box": "^2.0.5"
   },
-  "gitHead": "c4f2172045f094220a0a73d4a7c0b9da59ba4748"
+  "devDependencies": {
+    "@formily/core": "^2.3.7",
+    "@formily/grid": "^2.3.7",
+    "@formily/json-schema": "^2.3.7",
+    "@formily/react": "^2.3.7",
+    "@formily/reactive": "^2.3.7",
+    "@formily/reactive-react": "^2.3.7",
+    "@formily/shared": "^2.3.7"
+  }
 }

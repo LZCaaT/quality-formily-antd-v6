@@ -116,13 +116,14 @@ export const BaseItem: React.FC<React.PropsWithChildren<IFormItemProps>> = ({
     )
 
   const gridStyles: React.CSSProperties = {}
+  const hasDistinctTooltip = Boolean(tooltip && tooltip !== label)
 
   const getOverflowTooltip = () => {
     if (overflow) {
       return (
         <div>
           <div>{label}</div>
-          <div>{tooltip}</div>
+          {hasDistinctTooltip && <div>{tooltip}</div>}
         </div>
       )
     }
@@ -139,7 +140,7 @@ export const BaseItem: React.FC<React.PropsWithChildren<IFormItemProps>> = ({
       </div>
     )
 
-    if ((tooltipLayout === 'text' && tooltip) || overflow) {
+    if ((tooltipLayout === 'text' && hasDistinctTooltip) || overflow) {
       return (
         <Tooltip placement="top" title={getOverflowTooltip()}>
           {labelChildren}
@@ -150,7 +151,7 @@ export const BaseItem: React.FC<React.PropsWithChildren<IFormItemProps>> = ({
   }
 
   const renderTooltipIcon = () => {
-    if (tooltip && tooltipLayout === 'icon' && !overflow) {
+    if (hasDistinctTooltip && tooltipLayout === 'icon' && !overflow) {
       return (
         <span className={`${prefixCls}-label-tooltip-icon`}>
           <Tooltip placement="top" title={tooltip}>
@@ -168,7 +169,7 @@ export const BaseItem: React.FC<React.PropsWithChildren<IFormItemProps>> = ({
         className={cls({
           [`${prefixCls}-label`]: true,
           [`${prefixCls}-label-tooltip`]:
-            (tooltip && tooltipLayout === 'text') || overflow,
+            (hasDistinctTooltip && tooltipLayout === 'text') || overflow,
           [`${prefixCls}-item-col-${labelCol}`]: enableCol && !!labelCol,
         })}
         style={labelStyle}

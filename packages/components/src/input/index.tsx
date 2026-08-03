@@ -1,12 +1,28 @@
 import { LoadingOutlined } from '@ant-design/icons'
 import { connect, mapProps, mapReadPretty, ReactFC } from '@formily/react'
-import { Input as AntdInput } from 'antd'
-import type { InputProps } from 'antd/es/input'
+import { Input as AntdInput, Space, type InputProps, type InputRef } from 'antd'
 import React from 'react'
 import { PreviewText } from '../preview-text'
 
+const CompactInput = React.forwardRef<InputRef, InputProps>(
+  ({ addonBefore, addonAfter, style, ...props }, ref) => {
+    if (addonBefore == null && addonAfter == null) {
+      return <AntdInput {...props} ref={ref} style={style} />
+    }
+    return (
+      <Space.Compact block style={style}>
+        {addonBefore != null && <Space.Addon>{addonBefore}</Space.Addon>}
+        <AntdInput {...props} ref={ref} />
+        {addonAfter != null && <Space.Addon>{addonAfter}</Space.Addon>}
+      </Space.Compact>
+    )
+  }
+)
+
+CompactInput.displayName = 'CompactInput'
+
 const InternalInput: ReactFC<InputProps> = connect(
-  AntdInput,
+  CompactInput,
   mapProps((props, field) => {
     return {
       ...props,

@@ -3,7 +3,7 @@ import {
   FormButtonGroup,
   FormItem,
   Submit,
-} from '@potop/formily-antd-v6'
+} from '@designable-next/formily-antd-v6'
 import {
   createForm,
   Field as FieldType,

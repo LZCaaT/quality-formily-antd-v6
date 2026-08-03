@@ -28,7 +28,7 @@ function mapCardProps(props: CardProps): CardProps {
     if (!borderedWarned && process.env.NODE_ENV !== 'production') {
       borderedWarned = true
       console.warn(
-        '[@potop/formily-antd-v6 ArrayCards] `bordered` is deprecated. Please use `variant` instead.'
+        '[@designable-next/formily-antd-v6 ArrayCards] `bordered` is deprecated. Please use `variant` instead.'
       )
     }
     return { ...rest, variant: bordered ? 'outlined' : 'borderless' }

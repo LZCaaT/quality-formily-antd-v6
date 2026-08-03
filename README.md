@@ -4,7 +4,7 @@
 <img src="https://img.alicdn.com/tfs/TB1fHhZu4D1gK0jSZFyXXciOVXa-2500-1200.png">
 <img src="https://img.shields.io/npm/dt/@formily/antd-v5"/>
 <img src="https://img.shields.io/npm/dm/@formily/antd-v5"/>
-<a href="https://www.npmjs.com/package/@potop/formily-antd-v6"><img src="https://img.shields.io/npm/v/@potop/formily-antd-v6.svg"></a>
+<a href="https://www.npmjs.com/package/@designable-next/formily-antd-v6"><img src="https://img.shields.io/npm/v/@designable-next/formily-antd-v6.svg"></a>
 <a href="https://codecov.io/gh/formilyjs/antd">
   <img src="https://codecov.io/gh/formilyjs/antd/branch/master/graph/badge.svg?token=3V9RU8Wh9d"/>
 </a>
@@ -50,7 +50,7 @@ The Awesome Components Library with Formily & Ant Design.
 ## Contributors
 
 This project exists thanks to all the people who contribute.
-<a href="https://github.com/potop/formily-antd-v6/graphs/contributors"><img src="https://contrib.rocks/image?repo=formilyjs/antd" /></a>
+<a href="https://github.com/LZCaaT/quality-formily-antd-v6/graphs/contributors"><img src="https://contrib.rocks/image?repo=formilyjs/antd" /></a>
 
 ## LICENSE
 

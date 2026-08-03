@@ -94,7 +94,7 @@ const createFormCollapse = (defaultActiveKeys?: ActiveKeys) => {
 }
 
 const InternalFormCollapse: ReactFC<IFormCollapseProps> = observer(
-  ({ formCollapse, ...props }) => {
+  ({ formCollapse, children: _children, ...props }) => {
     const field = useField()
     const panels = usePanels()
     const prefixCls = usePrefixCls('formily-collapse', props)
@@ -134,18 +134,17 @@ const InternalFormCollapse: ReactFC<IFormCollapseProps> = observer(
           props?.onChange?.(key)
           _formCollapse?.setActiveKeys?.(key)
         }}
-      >
-        {panels.map(({ props, schema, name }, index) => (
-          <Collapse.Panel
-            key={index}
-            {...props}
-            header={badgedHeader(name, props)}
-            forceRender
-          >
-            <RecursionField schema={schema} name={name} />
-          </Collapse.Panel>
-        ))}
-      </Collapse>
+        items={panels.map(({ props: panelProps, schema, name }) => {
+          const { header, key, ...restPanelProps } = panelProps
+          return {
+            ...restPanelProps,
+            key,
+            label: badgedHeader(name, panelProps),
+            forceRender: true,
+            children: <RecursionField schema={schema} name={name} />,
+          }
+        })}
+      />
     )
   }
 )

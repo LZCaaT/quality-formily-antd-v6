@@ -92,6 +92,13 @@ const isAdditionComponent = (schema: Schema) => {
   return schema['x-component']?.indexOf('Addition') > -1
 }
 
+const isOperationColumn = (schema: Schema) =>
+  Object.values(schema.properties || {}).some((child) =>
+    ['Copy', 'Remove', 'MoveDown', 'MoveUp'].some(
+      (name) => child['x-component']?.indexOf(name) > -1
+    )
+  )
+
 const useArrayTableSources = () => {
   const arrayField = useField()
   const schema = useFieldSchema()
@@ -105,8 +112,12 @@ const useArrayTableSources = () => {
         return []
       const name = schema['x-component-props']?.['dataIndex'] || schema['name']
       const field = arrayField.query(arrayField.address.concat(name)).take()
-      const columnProps =
+      const sourceColumnProps =
         field?.component?.[1] || schema['x-component-props'] || {}
+      const columnProps =
+        isOperationColumn(schema) && sourceColumnProps.align == null
+          ? { ...sourceColumnProps, align: 'center' }
+          : sourceColumnProps
       const display = field?.display || schema['x-display']
       return [
         {
@@ -366,7 +377,7 @@ const WrapperComp = (props: React.HTMLAttributes<HTMLTableSectionElement>) => {
       start={startIndex}
       list={dataSource.slice()}
       accessibility={{
-        container: ref.current || undefined,
+        container: typeof document === 'undefined' ? undefined : document.body,
       }}
       onSortStart={(event) => {
         addTdStyles(event.active.id as number)
