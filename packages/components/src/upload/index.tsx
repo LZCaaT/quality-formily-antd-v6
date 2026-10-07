@@ -201,16 +201,17 @@ export const Upload: ComposedUpload = connect(
 
 const Dragger = connect(
   (props: React.PropsWithChildren<IDraggerUploadProps>) => {
+    const prefixCls = usePrefixCls('upload')
     return (
       <div className={usePrefixCls('upload-dragger')}>
         <AntdUpload.Dragger {...useUploadProps(props)}>
           {props.children || (
             <React.Fragment>
-              <p className="ant-upload-drag-icon">
+              <p className={`${prefixCls}-drag-icon`}>
                 <InboxOutlined />
               </p>
               {props.textContent && (
-                <p className="ant-upload-text">{props.textContent}</p>
+                <p className={`${prefixCls}-text`}>{props.textContent}</p>
               )}
             </React.Fragment>
           )}

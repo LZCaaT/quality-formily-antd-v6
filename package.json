@@ -1,9 +1,10 @@
 {
   "name": "root",
   "private": true,
+  "packageManager": "npm@10.9.4",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/potop/formily-antd-v6.git"
+    "url": "git+https://github.com/LZCaaT/quality-formily-antd-v6.git"
   },
   "workspaces": [
     "packages/*"
@@ -16,7 +17,7 @@
     "start": "NODE_OPTIONS=--openssl-legacy-provider dumi dev",
     "test": "jest --coverage",
     "test:prod": "jest --coverage --silent",
-    "preversion": "yarn install --ignore-engines && npm run build && npm run lint",
+    "preversion": "npm ci --legacy-peer-deps && npm test -- --runInBand packages/components/src/__tests__/form-grid.spec.tsx && npm run build && npm run lint",
     "version:alpha": "lerna version prerelease --preid alpha",
     "version:beta": "lerna version prerelease --preid beta",
     "version:major": "lerna version major",
@@ -43,8 +44,11 @@
     }
   },
   "resolutions": {
-    "rollup-plugin-typescript2": "^0.34.1",
+    "rollup-plugin-typescript2": "0.34.1",
     "typescript": "^5.2.0"
+  },
+  "overrides": {
+    "rollup-plugin-typescript2": "0.34.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
@@ -86,10 +90,14 @@
     "pretty-quick": "^3.1.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-is": "^19.2.4",
     "rimraf": "^3.0.0",
     "staged-git-files": "^1.1.2",
     "ts-jest": "^26.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   }
 }

@@ -207,15 +207,8 @@ const Copy = forwardRef<HTMLButtonElement, CommonProps>((props, ref) => {
   if (array.field?.pattern !== 'editable') return null
   return wrapSSR(
     <Button
-      type="default"
-      ghost
+      type="text"
       {...props}
-      style={{
-        padding: '0 0 0 6px',
-        width: 'auto',
-        height: 'auto',
-        ...props.style,
-      }}
       disabled={self?.disabled}
       className={cls(
         `${prefixCls}-copy`,
@@ -256,15 +249,8 @@ const Remove = forwardRef<HTMLButtonElement | HTMLAnchorElement, CommonProps>(
     if (array.field?.pattern !== 'editable') return null
     return wrapSSR(
       <Button
-        type="default"
-        ghost
+        type="text"
         {...props}
-        style={{
-          padding: '0 0 0 6px',
-          width: 'auto',
-          height: 'auto',
-          ...props.style,
-        }}
         disabled={self?.disabled}
         className={cls(
           `${prefixCls}-remove`,
@@ -301,15 +287,8 @@ const MoveDown = forwardRef<HTMLButtonElement | HTMLAnchorElement, CommonProps>(
     if (array.field?.pattern !== 'editable') return null
     return (
       <Button
-        type="default"
-        ghost
+        type="text"
         {...props}
-        style={{
-          padding: '0 0 0 6px',
-          width: 'auto',
-          height: 'auto',
-          ...props.style,
-        }}
         disabled={self?.disabled}
         className={cls(
           `${prefixCls}-move-down`,
@@ -345,15 +324,8 @@ const MoveUp = forwardRef<HTMLButtonElement | HTMLAnchorElement, CommonProps>(
     if (array.field?.pattern !== 'editable') return null
     return (
       <Button
-        type="default"
-        ghost
+        type="text"
         {...props}
-        style={{
-          padding: '0 0 0 6px',
-          width: 'auto',
-          height: 'auto',
-          ...props.style,
-        }}
         disabled={self?.disabled}
         className={cls(
           `${prefixCls}-move-up`,

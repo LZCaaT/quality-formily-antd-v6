@@ -3,7 +3,7 @@ import {
   FormItem,
   Select,
   Submit,
-} from '@potop/formily-antd-v6'
+} from '@designable-next/formily-antd-v6'
 import { createForm, Field, FieldDataSource } from '@formily/core'
 import React from 'react'
 import { createSchemaField, FormProvider, ISchema } from '@formily/react'

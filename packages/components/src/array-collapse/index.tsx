@@ -75,7 +75,7 @@ const insertActiveKeys = (activeKeys: number[], index: number) => {
 }
 
 const InternalArrayCollapse: ReactFC<IArrayCollapseProps> = observer(
-  (props: IArrayCollapseProps) => {
+  ({ children: _children, ...props }: IArrayCollapseProps) => {
     const field = useField<ArrayField>()
     const dataSource = Array.isArray(field.value) ? field.value : []
     const [activeKeys, setActiveKeys] = useState<number[]>(
@@ -123,96 +123,95 @@ const InternalArrayCollapse: ReactFC<IArrayCollapseProps> = observer(
             setActiveKeys(toArr(keys).map(Number))
           }}
           className={cls(`${prefixCls}-item`, hashId, props.className)}
-        >
-          {dataSource.map((item, index) => {
-            const items = Array.isArray(schema.items)
-              ? schema.items[index] || schema.items[0]
-              : schema.items
+          items={dataSource
+            .map((item, index) => {
+              const itemSchema = Array.isArray(schema.items)
+                ? schema.items[index] || schema.items[0]
+                : schema.items
+              if (!itemSchema) return null
 
-            if (!items) return null
-            const panelProps = field
-              .query(`${field.address}.${index}`)
-              .get('componentProps')
-            const props: CollapsePanelProps = items['x-component-props']
-            const header = () => {
-              const header = panelProps?.header || props.header || field.title
-
-              const path = field.address.concat(index)
-              const errors = field.form.queryFeedbacks({
-                type: 'error',
-                address: `${path}.**`,
-              })
-              return (
-                <ArrayBase.Item
-                  index={index}
-                  record={() => field.value?.[index]}
-                >
+              const panelProps = field
+                .query(`${field.address}.${index}`)
+                .get('componentProps')
+              const itemProps: Partial<CollapsePanelProps> =
+                itemSchema['x-component-props'] || {}
+              const header = () => {
+                const header =
+                  panelProps?.header || itemProps.header || field.title
+                const path = field.address.concat(index)
+                const errors = field.form.queryFeedbacks({
+                  type: 'error',
+                  address: `${path}.**`,
+                })
+                return (
+                  <ArrayBase.Item
+                    index={index}
+                    record={() => field.value?.[index]}
+                  >
+                    <RecursionField
+                      schema={itemSchema}
+                      name={index}
+                      filterProperties={(childSchema) =>
+                        isIndexComponent(childSchema)
+                      }
+                      onlyRenderProperties
+                    />
+                    {errors.length ? (
+                      <Badge
+                        size="small"
+                        className="errors-badge"
+                        count={errors.length}
+                      >
+                        {header}
+                      </Badge>
+                    ) : (
+                      header
+                    )}
+                  </ArrayBase.Item>
+                )
+              }
+              const extra = (
+                <ArrayBase.Item index={index} record={item}>
+                  {panelProps?.extra}
                   <RecursionField
-                    schema={items}
+                    schema={itemSchema}
                     name={index}
-                    filterProperties={(schema) => {
-                      if (!isIndexComponent(schema)) return false
-                      return true
-                    }}
+                    filterProperties={(childSchema) =>
+                      isOperationComponent(childSchema)
+                    }
                     onlyRenderProperties
                   />
-                  {errors.length ? (
-                    <Badge
-                      size="small"
-                      className="errors-badge"
-                      count={errors.length}
-                    >
-                      {header}
-                    </Badge>
-                  ) : (
-                    header
-                  )}
                 </ArrayBase.Item>
               )
-            }
-
-            const extra = (
-              <ArrayBase.Item index={index} record={item}>
-                {panelProps?.extra}
+              const content = (
                 <RecursionField
-                  schema={items}
+                  schema={itemSchema}
                   name={index}
-                  filterProperties={(schema) => {
-                    if (!isOperationComponent(schema)) return false
-                    return true
-                  }}
-                  onlyRenderProperties
+                  filterProperties={(childSchema) =>
+                    !isIndexComponent(childSchema) &&
+                    !isOperationComponent(childSchema)
+                  }
                 />
-              </ArrayBase.Item>
-            )
-
-            const content = (
-              <RecursionField
-                schema={items}
-                name={index}
-                filterProperties={(schema) => {
-                  if (isIndexComponent(schema)) return false
-                  if (isOperationComponent(schema)) return false
-                  return true
-                }}
-              />
-            )
-            return (
-              <Collapse.Panel
-                {...props}
-                {...panelProps}
-                forceRender
-                key={index}
-                header={header()}
-                extra={extra}
-              >
-                <ArrayBase.Item index={index} key={index} record={item}>
-                  {content}
-                </ArrayBase.Item>
-              </Collapse.Panel>
-            )
-          })}
-        </Collapse>
+              )
+              const { header: _itemHeader, ...restItemProps } = itemProps
+              const { header: _panelHeader, ...restPanelProps } =
+                panelProps || {}
+              return {
+                ...restItemProps,
+                ...restPanelProps,
+                forceRender: true,
+                key: index,
+                label: header(),
+                extra,
+                children: (
+                  <ArrayBase.Item index={index} key={index} record={item}>
+                    {content}
+                  </ArrayBase.Item>
+                ),
+              }
+            })
+            .filter((item): item is NonNullable<typeof item> => item !== null)}
+        />
       )
     }
     return wrapSSR(
