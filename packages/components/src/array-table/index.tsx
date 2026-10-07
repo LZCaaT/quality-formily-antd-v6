@@ -38,6 +38,9 @@ import {
 } from '../__builtins__'
 import useStyle from './style'
 
+export * from './dynamic-data-source'
+export * from './dynamic-row-select'
+
 interface ObservableColumnSource {
   field?: GeneralField
   columnProps: ColumnProps<any>
